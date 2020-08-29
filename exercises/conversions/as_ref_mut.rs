@@ -9,7 +9,6 @@ fn byte_counter<T>(arg: T) -> usize {
     arg.as_ref().as_bytes().len()
 }
 
-// I AM NOT DONE
 // Obtain the number of characters (not bytes) in the given argument
 // Add the AsRef trait appropriately as a trait bound
 fn char_counter<T>(arg: T) -> usize {
@@ -36,5 +35,17 @@ mod tests {
     fn same_counts() {
         let s = "Cafe au lait";
         assert_eq!(char_counter(s), byte_counter(s));
+    }
+
+    #[test]
+    fn different_counts_using_string() {
+        let s = String::from("Café au lait");
+        assert_ne!(char_counter(s.clone()), byte_counter(s));
+    }
+
+    #[test]
+    fn same_counts_using_string() {
+        let s = String::from("Cafe au lait");
+        assert_eq!(char_counter(s.clone()), byte_counter(s));
     }
 }
